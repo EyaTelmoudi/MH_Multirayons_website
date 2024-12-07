@@ -39,7 +39,7 @@ class UserController {
                 if ($user['role'] == 'admin') {
                     header('Location: commandes.php');  // Redirige vers le tableau de bord admin
                 } else {
-                    header('Location: panier.php');  // Redirige vers le tableau de bord utilisateur
+                    header('Location: ../cart.php');  // Redirige vers le tableau de bord utilisateur
                 }
                 exit();
             } else {
