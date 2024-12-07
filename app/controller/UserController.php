@@ -1,50 +1,54 @@
 <?php
+require_once 'app/model/UserModel.php';
 
-require_once '../config/database.php'; // Inclure la connexion à la base de données
-require_once '../app/models/User.php'; // Inclure le modèle User
-
-class UserController
-{
-    private $db;
-
-    // Le constructeur initialise la connexion à la base de données
-    public function __construct()
-    {
-        // Initialiser la connexion à la base de données
-        $database = new Database();
-        $this->db = $database->connect();
+class UserController {
+    
+    public function showLoginForm() {
+        include 'app/view/login.php';  // Affiche le formulaire de connexion
     }
 
-    /**
-     * Gère l'enregistrement d'un nouvel utilisateur.
-     */
-    public function register($name, $email, $password)
-    {
-        // Valider les données
-        if (empty($name) || empty($email) || empty($password)) {
-            echo "Tous les champs sont obligatoires.";
-            return;
-        }
+    public function register() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            $role = 'user';  // Valeur par défaut pour les utilisateurs
 
-        // Vérifier si l'utilisateur existe déjà avec cet e-mail
-        $userModel = new User($this->db); // Instancier le modèle User avec la connexion DB
-        $existingUser = $userModel->getUserByEmail($email);
-
-        if ($existingUser) {
-            echo "Cet e-mail est déjà utilisé.";
-            return;
-        }
-
-        // Hasher le mot de passe pour des raisons de sécurité
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-        // Créer l'utilisateur
-        $userId = $userModel->create($name, $email, $hashedPassword);
-
-        if ($userId) {
-            echo "Utilisateur enregistré avec succès. ID : " . $userId;
+            $userModel = new UserModel();
+            $userModel->register($name, $email, $password, $phone, $address, $role);
+            header('Location: index.php?action=login');  // Redirige vers la page de connexion
         } else {
-            echo "Erreur lors de l'enregistrement.";
+            include 'app/view/register.php';  // Affiche le formulaire d'inscription
+        }
+    }
+
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $userModel = new UserModel();
+            $user = $userModel->login($email, $password);
+
+            if ($user) {
+                $_SESSION['user'] = $user;
+                $_SESSION['role'] = $user['role'];
+
+                if ($user['role'] == 'admin') {
+                    header('Location: commandes.php');  // Redirige vers le tableau de bord admin
+                } else {
+                    header('Location: panier.php');  // Redirige vers le tableau de bord utilisateur
+                }
+                exit();
+            } else {
+                echo "Identifiants incorrects.";
+            }
+        } else {
+            include 'app/view/login.php';  // Affiche le formulaire de connexion
         }
     }
 }
+?>
+

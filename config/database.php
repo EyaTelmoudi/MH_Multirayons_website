@@ -1,32 +1,26 @@
 <?php
-
-class Database
-{
-    private $host = "localhost";
-    private $db_name = "ecommerce";
-    private $username = "root";
-    private $password = "";
+class Database {
+    private static $instance = null;
     private $conn;
 
-    public function getConnection()
-    {
-        $this->conn = null;
+    private function __construct() {
+        $this->conn = new mysqli('localhost', 'root', '', 'project-societemh');
 
-        try {
-            $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
-                $this->username,
-                $this->password
-            );
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if ($this->conn->connect_error) {
+            die("Échec de la connexion : " . $this->conn->connect_error);
+        }
+    }
 
-            // Test: Si la connexion réussie, afficher un message
-            echo "Connexion réussie à la base de données.";
-        } catch (PDOException $exception) {
-            // Si la connexion échoue, afficher l'erreur
-            echo "Connexion échouée: " . $exception->getMessage();
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
         }
 
-        return $this->conn;
+        return self::$instance->conn;
+    }
+
+    public function __wakeup() {
+        // Cette méthode est nécessaire pour la sérialisation d'objet singleton
     }
 }
+?>
