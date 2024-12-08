@@ -5,7 +5,7 @@ require_once '../config/database.php';
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
     // Si l'utilisateur n'est pas connecté, rediriger vers la page de login
-    header("Location: login.php");
+    header("Location: ../app/view/login.php");
     exit();
 }
 
