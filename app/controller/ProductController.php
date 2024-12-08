@@ -1,7 +1,7 @@
 <?php
 
 
-require_once 'app/model/Product.php';
+require_once '../app/model/Product.php';
 
 class ProductController {
     private $pdo;
@@ -21,7 +21,7 @@ class ProductController {
 
         // Pass products data to the view
 
-        include 'app/view/products.php';
+        include '../app/view/products.php';
 
     }
 

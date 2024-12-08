@@ -12,15 +12,15 @@ class Database {
         }
     }
 
-    public static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new Database();
-        }
-    }
+
 
 
     // Méthode pour récupérer l'instance unique de la classe
     public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+
         return self::$instance->conn;
     }
 

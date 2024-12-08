@@ -15,7 +15,7 @@ if (isset($_POST['id'])) {
     } else {
         // Récupérer les informations du produit
         require_once '../config/database.php';
-        $pdo = Database::getInstance()->getPDO();
+        $pdo = Database::getInstanceA()->getPDO();
         $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
         $stmt->execute([$productId]);
         $product = $stmt->fetch(PDO::FETCH_ASSOC);

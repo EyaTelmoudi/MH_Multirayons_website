@@ -6,7 +6,7 @@ require_once '../config/database.php';
 require_once '../app/controller/ProductController.php';
 
 // Récupérer l'instance PDO via le Singleton
-$pdo = Database::getInstance()->getPDO();
+$pdo = Database::getInstanceA()->getPDO();
 
 // Instancier le contrôleur
 $productController = new ProductController($pdo);
