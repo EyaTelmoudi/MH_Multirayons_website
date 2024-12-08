@@ -1,8 +1,10 @@
 <?php
 require_once 'app/model/UserModel.php';
 
+
 class UserController {
     
+
     public function showLoginForm() {
         include 'app/view/login.php';  // Affiche le formulaire de connexion
     }
@@ -32,6 +34,11 @@ class UserController {
             $userModel = new UserModel();
             $user = $userModel->login($email, $password);
 
+            $action = isset($_GET['action']) ? $_GET['action'] : 'login';
+
+            $userController = new UserController();
+
+
             if ($user) {
                 $_SESSION['user'] = $user;
                 $_SESSION['role'] = $user['role'];
@@ -39,7 +46,7 @@ class UserController {
                 if ($user['role'] == 'admin') {
                     header('Location: commandes.php');  // Redirige vers le tableau de bord admin
                 } else {
-                    header('Location: ../cart.php');  // Redirige vers le tableau de bord utilisateur
+                    header('Location: public/cart.php');  // Redirige vers le tableau de bord utilisateur
                 }
                 exit();
             } else {

@@ -1,9 +1,9 @@
 <?php
-session_start();
-require_once '../config/database.php';
+//session_start();
+require_once 'config/database.php';
 
 // Singleton Pattern pour récupérer l'instance PDO
-$pdo = Database::getInstance()->getPDO();
+$pdo = Database::getInstanceA()->getPDO();
 
 // Récupérer tous les produits
 $sql = "SELECT * FROM products";
@@ -39,7 +39,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Bouton Voir le Panier -->
     <div class="cart-button">
-            <a href="../public/cart.php" class="view-cart">Voir le Panier</a>
+            <a href="../cart.php" class="view-cart">Voir le Panier</a>
 
     </div>
 

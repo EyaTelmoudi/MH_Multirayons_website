@@ -1,6 +1,6 @@
-<?php
+<<?php
 // Inclure le fichier de configuration de la base de données
-require_once '../config/database.php';  // Si ton fichier se trouve dans le dossier config
+require_once 'config/database.php';  // Si ton fichier se trouve dans le dossier config
 
 class Product {
     private $pdo;

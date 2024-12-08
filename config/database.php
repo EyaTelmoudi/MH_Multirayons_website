@@ -3,7 +3,7 @@ class Database {
     private static $instance = null;
     private $conn;
 
-    private function __construct() {
+    private function __constructW() {
         $this->conn = new mysqli('localhost', 'root', '', 'project-societemh');
 
         if ($this->conn->connect_error) {
@@ -28,7 +28,7 @@ class Database {
 
 
     //partie ajouter par aya 
-    private function __constructA() {
+    private function __construct() {
         // Configurer les informations de connexion à la base de données
         $host = 'localhost';
         $dbname = 'project-societemh';
