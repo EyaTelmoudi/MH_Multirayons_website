@@ -6,14 +6,6 @@ class CartController {
     public function addToCart($productId) {
         session_start();
 
-        /*
-        // Vérifier si l'utilisateur est connecté
-        if (!isset($_SESSION['user_id'])) {
-            // Rediriger vers la page de login si non connecté
-            header('Location: ../public/login.php');
-            exit();
-        }
-            */
 
         // Si le panier n'existe pas, créer un tableau vide
         if (!isset($_SESSION['cart'])) {
@@ -53,19 +45,12 @@ class CartController {
     public function showCart() {
         session_start();
 
-        /*
-        // Vérifier si l'utilisateur est connecté
-        if (!isset($_SESSION['user_id'])) {
-            // Rediriger vers la page de login si non connecté
-            header('Location: ../public/login.php');
-            exit();
-        }
-            */
-
+        
         // Vérifier si le panier existe
         $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
         require_once '../app/views/cart.php';
     }
 }
+
 ?>

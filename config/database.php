@@ -1,29 +1,38 @@
 <?php
-/*
-// Configurer les informations de connexion à la base de données
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'project-societemh'); // Remplace par ton nom de base de données
-define('DB_USER', 'root'); // Remplace par ton utilisateur
-define('DB_PASS', ''); // Remplace par ton mot de passe si nécessaire
 
-try {
-    // Créer une instance PDO pour la connexion à la base de données
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-    // Définir le mode d'erreur de PDO sur exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    // Afficher l'erreur si la connexion échoue
-    die("Erreur de connexion : " . $e->getMessage());
-}
-    */
-?>
-
-<?php
 class Database {
     private static $instance = null;
-    private $pdo;
+    private $conn;
 
-    // Empêche l'instanciation externe
+    private function __constructW() {
+        $this->conn = new mysqli('localhost', 'root', '', 'project-societemh');
+
+        if ($this->conn->connect_error) {
+            die("Échec de la connexion : " . $this->conn->connect_error);
+        }
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+    }
+
+
+    // Méthode pour récupérer l'instance unique de la classe
+    public static function getInstance() {
+        return self::$instance->conn;
+    }
+
+   
+
+    public function __wakeup() {
+        // Cette méthode est nécessaire pour la sérialisation d'objet singleton
+    }
+
+
+
+    //partie ajouter par aya 
     private function __construct() {
         // Configurer les informations de connexion à la base de données
         $host = 'localhost';
@@ -39,9 +48,8 @@ class Database {
             echo "Erreur de connexion : " . $e->getMessage();
         }
     }
-
-    // Méthode pour récupérer l'instance unique de la classe
-    public static function getInstance() {
+    private $pdo;
+    public static function getInstanceA() {
         if (self::$instance === null) {
             self::$instance = new Database();
         }

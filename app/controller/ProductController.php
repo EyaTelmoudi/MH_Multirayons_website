@@ -1,12 +1,15 @@
 <?php
-require_once '../app/model/Product.php';
+
+
+require_once 'app/model/Product.php';
 
 class ProductController {
     private $pdo;
 
     // Constructeur pour initialiser la connexion à la base de données
     public function __construct($pdo) {
-        $this->pdo = Database::getInstance()->getPDO();
+
+        $this->pdo = Database::getInstanceA()->getPDO();
     }
 
     // Méthode pour afficher tous les produits
@@ -17,7 +20,8 @@ class ProductController {
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Pass products data to the view
-        include '../app/view/products.php';
+
+        include 'app/view/products.php';
 
     }
 
@@ -74,4 +78,5 @@ class ProductController {
     }
     
 }
+
 ?>
