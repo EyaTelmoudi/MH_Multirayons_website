@@ -7,6 +7,11 @@ Bienvenue sur le dépôt GitHub de notre site e-commerce **MH Multirayons**, sp�
 - **Sayeh Wiem**
 - **Aya Telmoudi**
 
+## 📹 Démonstration
+
+Une **vidéo de démonstration du projet** est disponible directement dans la branche `master` du dépôt GitHub.  
+👉 [Voir la vidéo dans la branche `master`](https://github.com/votre-repo)
+
 ## 🗂️ Structure du Projet
 
 Le projet suit une architecture **MVC** et utilise le **design pattern Singleton**.
