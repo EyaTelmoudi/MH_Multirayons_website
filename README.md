@@ -80,11 +80,6 @@ Nom de la base : `project-societemh`
 - ☐ Optimisation du CSS / UX
 - ☐ Implémenter la gestion des avis clients
 
-## 📷 Captures d’écran (optionnel)
-
-Ajoutez ici des images de l’interface utilisateur côté admin/client pour illustrer les fonctionnalités.
-
----
 
 ## 📞 Contact
 
