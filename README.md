@@ -40,7 +40,7 @@ Nom de la base : `project-societemh`
 - `reviews` : avis clients
 - `admins_logs` : actions des administrateurs
 
-📥 Le fichier d’extraction SQL est disponible dans le dépôt : [`project-societemh.sql`](./project-societemh (1).sql)
+📥 Le fichier d’extraction SQL est disponible dans le dépôt : [`project-societemh (1).sql`](./project-societemh%20(1).sql)
 
 > ℹ️ Le script inclut la structure complète de la base + des données de test + des triggers comme `update_order_total_price`.
 
